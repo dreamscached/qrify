@@ -27,7 +27,9 @@ export function register(app: Hono) {
 				errorCorrectionLevel: param.error_correction_level
 			});
 
-			return c.text(qr + "\n", 200);
+			return c.text(qr + "\n", 200, {
+				"Cache-Control": "public, max-age=31536000, immutable"
+			});
 		}
 	);
 }
