@@ -1,10 +1,12 @@
-import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
+import { zValidator } from "@hono/zod-validator";
+import { cache } from "hono/cache";
 
 import * as QR from "qrcode";
 import z from "zod/v4";
 
 import { QuerySchema } from "../common/schema/param";
+import { CACHE_CONTROL_QR, CACHE_NAME } from "../common/constants";
 
 const ParamSchema = z.object({
 	text: z
@@ -18,6 +20,10 @@ export function register(app: Hono) {
 		"/:text",
 		zValidator("param", ParamSchema),
 		zValidator("query", QuerySchema),
+		cache({
+			cacheName: CACHE_NAME,
+			cacheControl: CACHE_CONTROL_QR
+		}),
 		async (c) => {
 			const text = c.req.valid("param").text;
 			const param = c.req.valid("query");
@@ -27,9 +33,7 @@ export function register(app: Hono) {
 				errorCorrectionLevel: param.error_correction_level
 			});
 
-			return c.text(qr + "\n", 200, {
-				"Cache-Control": "public, max-age=31536000, immutable"
-			});
+			return c.text(qr + "\n", 200);
 		}
 	);
 }
