@@ -1,0 +1,15 @@
+diff --git a/package.json b/package.json
+index 6c9ab00d0c92ac9d2970d246d93d3b37e33cb552..039711c16925656dae09eb7126e44f7c160e829f 100644
+--- a/package.json
++++ b/package.json
+@@ -14,10 +14,6 @@
+     "qrcode"
+   ],
+   "main": "./lib/index.js",
+-  "browser": {
+-    "./lib/index.js": "./lib/browser.js",
+-    "fs": false
+-  },
+   "files": [
+     "bin",
+     "build",
