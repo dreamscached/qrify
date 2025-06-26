@@ -1,0 +1,21 @@
+{
+  "packageManager": "yarn@4.9.2",
+  "name": "@dreamscached/qrify",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.7.0",
+    "hono": "^4.8.2",
+    "qrcode": "patch:qrcode@npm%3A1.5.4#~/.yarn/patches/qrcode-npm-1.5.4-7eaef32d9f.patch",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1",
+    "prettier": "^3.6.0",
+    "wrangler": "^4.21.2"
+  }
+}
